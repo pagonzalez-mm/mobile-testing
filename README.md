@@ -1,5 +1,8 @@
-# --------------------------- ARCHIVOS PROBADOS WEB ---------------------------
-# ▶️ Archivo probado: /web/BuscarTest.cy.js
+# --------------------------- ARCHIVOS PROBADOS MOBILE ---------------------------
+
+## (1) WEB http://www.automationpractice.pl     //problemas con la URL
+
+# ▶️ Archivo probado: /web/BuscarTest.spec.js
 Pruebas reales en http://www.automationpractice.pl.
 Valida la funcionalidad de búsqueda de productos.
 
@@ -16,7 +19,9 @@ Valida la funcionalidad de búsqueda de productos.
 - Validar cada .product-name
 - Afirmar que todos contengan la palabra
 
-# ▶️ Archivo probado: /web/Login.cy.js
+## (2) WEB https://the-internet.herokuapp.com/basic_auth
+
+# ▶️ Archivo probado: /web/LoginMobilde.spec.js
 Pruebas contra el sitio de autenticación básica:
 https://the-internet.herokuapp.com/basic_auth
 
@@ -37,7 +42,9 @@ https://the-internet.herokuapp.com/basic_auth
 - Validar mensaje (esperado que falle)
 - Validar URL
 
-# ▶️ Archivo probado: /web/PruebaTestDOMMVC.cy.js
+## (3) WEB https://todomvc.com/examples/react/dist/       
+
+# ▶️ Archivo probado: TodoMobile.spec.js
 Sitio probado:
 https://todomvc.com/examples/react/dist/
 Valida flujo de tareas (add, complete, persistencia).
@@ -54,10 +61,7 @@ Valida flujo de tareas (add, complete, persistencia).
     - restantes
 - Usar filtros (All / Active / Completed)
 - Validar contador de tareas
-- Persistencia al recargar
-    - Recargar página
-    - Validar que las tareas se mantengan
-    - Validar estado persistente
+
 
 ## tecnologias usadas
 
@@ -113,16 +117,23 @@ Valida flujo de tareas (add, complete, persistencia).
 - browserName: "Chrome"
 
 # ▶️ Ejecutar pruebas Mobile
+**Iniciar Appium(Iniciar emulador Android)**
+**Verificar emulador**
+//muestra si Android fue detectado.
+- adb devices
 
 **Iniciar Appium**
+//LEVANTAMOS APIUM   test → WebDriverIO → Appium → Android/Chrome
 - appium --allow-insecure=uiautomator2:chromedriver_autodownload
 
 **Verificar emulador**
+//muestra si Android fue detectado.
 - adb devices
 
 **Ejecutar pruebas**
 - npx wdio
-
+**archivo específico**
+- npx wdio run ./wdio.conf.js --spec ./test/buscarTest.spec.js
 
 ## Estructura Mobile
 TEST-MOBILE/

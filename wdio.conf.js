@@ -37,6 +37,13 @@ exports.config = {
   logLevel: 'info',
   bail: 0,
   baseUrl: 'https://the-internet.herokuapp.com',
+
+  env: {
+    TODO_URL: 'https://todomvc.com/examples/react/dist/',
+    LOGIN_URL: 'https://the-internet.herokuapp.com/basic_auth'
+},
+
+
   waitforTimeout: 20000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
@@ -52,4 +59,6 @@ exports.config = {
   // ❌ No levantamos Appium desde WDIO (ya lo tienes en otra terminal)
   //
   services: [],
+
+
 };

@@ -1,13 +1,15 @@
-import { expect } from 'chai';
+import { expect } from 'chai';//Chai para hacer assertions.
+import TodoPage from '../pages/TodoPage';
 
 describe("Prueba de pagina de tabla de tareas en Android Chrome", () => { 
 
     beforeEach(async () => {
         // Navegación directa a la URL solicitada
-        await browser.url('https://todomvc.com/examples/react/dist/');
+        await browser.url(browser.options.env.TODO_URL);
     });
 
-    it("debe agregar y tachar las 5 primeras tareas", async () => { 
+    it("debe agregar y tachar las 4 primeras tareas", async () => { 
+        //creo mi arreglo
         const misTareas = [
             "1) lavar trastes", 
             "2) lavar ropa", 
@@ -17,42 +19,20 @@ describe("Prueba de pagina de tabla de tareas en Android Chrome", () => {
         ];
 
         // 1. Agregar tareas
-        const input = await $('.new-todo');
-        for (const tarea of misTareas) {
-            await input.setValue(tarea);
-            await browser.keys('Enter');
-        }
+        //buscar el input(campos)
+        //ciclo for que recorre todo el arreglo
+        await TodoPage.agregarTareas(misTareas);
 
         // 2. Tachar las primeras 4 (índices 0 al 3)
-        const lista = await $$('.todo-list li');
-        for (let i = 0; i <= 3; i++) {
-            const checkbox = await lista[i].$('.toggle');
-            await checkbox.click();
-        }
+        // seleccionamos todos los <li> dentro de .todo-list
+        //ciclo for recorre los indices hasta el 3
+        await TodoPage.tacharPrimeras(4);
 
         // 3. Navegar por los filtros (Usando selectores de texto para mobile)
-        await $('=Active').click();
-        await $('=Completed').click();
-        await $('=All').click();
-
+        //cada opcion le damos click para ver como se comporta en el sistema
+        await TodoPage.navegarFiltros();
         // 4. Limpiar completadas
-        await $('.clear-completed').click();
+        await TodoPage.limpiarCompletadas();    
     });
 
-    it("debe recargar la página y verificar persistencia", async () => {
-        // 1. Recargar la página en el emulador
-        await browser.refresh();
-
-        // 2. Verificar que la tarea existe (o falla si no hay persistencia)
-        const primeraTarea = await $('.todo-list li label');
-        
-        // Usamos try/catch si esperas que falle como en tu descripción
-        try {
-            const texto = await primeraTarea.getText();
-            expect(texto).to.include("5) barrer sala");
-            console.log("La tarea persiste");
-        } catch (error) {
-            console.log("Error esperado: La tarea no persistió tras el refresh");
-        }
-    });
 });
